@@ -12,10 +12,14 @@ namespace Model
         static void Main(string[] args)
             //Deez Nuts
         {
-            BinaryTreeUtilities util = new BinaryTreeUtilities();
-            Queue<int> Q = new Queue<int>();
-            Q.Enqueue(1);
-            Console.WriteLine(Q.First());
+            Stack<int> stack = new Stack<int>();
+            stack.Push(1);
+            stack.Push(2);
+            stack.Push(3);
+            stack.Push(4);
+            stack.Push(5);
+            StackUtils SU = new StackUtils();
+            SU.pr(stack);
             Console.ReadLine();
         }
         //a static function the gets length and max value and makes a random array

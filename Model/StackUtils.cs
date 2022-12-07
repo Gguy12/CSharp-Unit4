@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-
-   public class StackUtils
+namespace Model
+{
+    internal class StackUtils
     {
         public Stack<T> CreateStack<T>(T[] arr)
         {
@@ -71,7 +76,7 @@
 
         }
 
-        public static int SumRec(Stack<int> st)
+        public   int SumRec(Stack<int> st)
 
         {
             if (st.IsEmpty())
@@ -97,7 +102,7 @@
 
 
 
-        public static bool IsExist(Stack<int> s, int val)
+        public  bool IsExist(Stack<int> s, int val)
 
         {
             Stack<int> temp = Clone<int>(s);
@@ -111,7 +116,7 @@
 
         }
 
-        public static bool IsExistRec(Stack<int> s, int val)
+        public  bool IsExistRec(Stack<int> s, int val)
 
         {
 
@@ -128,7 +133,7 @@
 
         }
 
-        public static void Sort(Stack<int> s)
+        public  void Sort(Stack<int> s)
 
         {
 
@@ -150,11 +155,11 @@
 
         }
 
-        public static Stack<int> BuildSort(int[] arr)
+        public  Stack<int> BuildSort(int[] arr)
 
         {
 
-            q Stack<int> s = new Stack<int>();
+            Stack<int> s = new Stack<int>();
             for (int i = 0; i < arr.Length; i++)
             {
                 s.Push(arr[i]);
@@ -166,7 +171,7 @@
 
         }
 
-        public static Stack<int> BuildSort(Node<int> ls)
+        public   Stack<int> BuildSort(Node<int> ls)
 
         {
 
@@ -175,8 +180,8 @@
             Stack<int> s = new Stack<int>();
             while (ls != null)
             {
-                s.Push(ls.Data);
-                ls = ls.Next;
+                s.Push(ls.GetValue());
+                ls = ls.GetNext();
             }
             Sort(s);
             return s;
@@ -184,7 +189,7 @@
 
         }
 
-        public static void AddValueToStackButtom<T>(Stack<T> stk, T e)
+        public   void AddValueToStackButtom<T>(Stack<T> stk, T e)
 
         {
 
@@ -199,18 +204,18 @@
 
         }
 
-        public static T RemoveButtom<T>(Stack<T> stk)
+        public void RemoveButtom<T>(Stack<T> stk)
 
         {
-            if (st.IsEmpty())
-                return 0;
-            T ontop = st.Pop();
-            int length = 1 + RecGetSize(st);
-            st.Push(ontop);
-            return length;
+            if (stk.IsEmpty())
+                return;
+            T ontop = stk.Pop();
+            int length = 1 + RecGetSize(stk);
+            stk.Push(ontop);
+            
         }
 
-        public static void InsertButtom<T>(Stack<T> stk, T elm)
+        public   void InsertButtom<T>(Stack<T> stk, T elm)
 
         {
             if (stk.IsEmpty())
@@ -223,7 +228,7 @@
             stk.Push(ontop);
         }
 
-        public static void MoveButtom2Top<T>(Stack<T> stk)
+        public   void MoveButtom2Top<T>(Stack<T> stk)
 
         {
             if (stk.IsEmpty())
@@ -233,7 +238,7 @@
             InsertButtom(stk, ontop);
         }
 
-        public static void MoveTop2Buttom<T>(Stack<T> stk)
+        public   void MoveTop2Buttom<T>(Stack<T> stk)
 
         {
             if (stk.IsEmpty())
@@ -243,7 +248,7 @@
             stk.Push(ontop);
         }
 
-        public static void InsertAtPos<T>(Stack<T> st, T e, int n)
+        public   void InsertAtPos<T>(Stack<T> st, T e, int n)
 
         {
             if (n == 0)
@@ -256,7 +261,7 @@
             st.Push(ontop);
         }
 
-        public static int RemoveMax(Stack<int> stk)
+        public   int RemoveMax(Stack<int> stk)
 
         {
             if (stk.IsEmpty())
@@ -275,7 +280,7 @@
             }
         }
 
-        public static int RemoveMaxRec(Stack<int> stk)
+        public   int RemoveMaxRec(Stack<int> stk)
 
         {
 
@@ -297,7 +302,7 @@
 
         //}
 
-        public static int RemoveMaxRec(Stack<int> stk, int currMax)
+        public   int RemoveMaxRec(Stack<int> stk, int currMax)
 
         {
 
@@ -312,7 +317,7 @@
 
         //}
 
-        public static void PrintTopButtomRec<T>(Stack<T> stk)
+        public   void PrintTopButtomRec<T>(Stack<T> stk)
 
         {
             if (stk.IsEmpty())
@@ -326,7 +331,7 @@
 
         //}
 
-        public static void PrintButtomTopRec<T>(Stack<T> stk)
+        public   void PrintButtomTopRec<T>(Stack<T> stk)
 
         {
             if (stk.IsEmpty())
@@ -340,7 +345,7 @@
 
         //}
 
-        public static int GetMax(Stack<int> stk)
+        public   int GetMax(Stack<int> stk)
 
         {
             if (stk.IsEmpty())
@@ -362,7 +367,7 @@
 
         //}
 
-        public static int GetMin(Stack<int> stk)
+        public   int GetMin(Stack<int> stk)
 
         {
             if (stk.IsEmpty())
@@ -384,8 +389,7 @@
 
         //}
 
-        public static T GetLast<T>(Stack<T> stk, bool remove)
-
+        public   T GetLast<T>(Stack<T> stk, bool remove)
         {
             if (stk.IsEmpty())
                 return default(T);
@@ -407,7 +411,40 @@
                 return last;
             }
         }
-        //{
+        public void pr<T>(Stack<T> q)
+        {
+            if (q.IsEmpty())
+                return;
+            T temp = q.Pop();
+            Console.Write(temp + " | ");
+            pr(q);
+            Console.WriteLine();
+            Console.Write(temp + " | ");
+            q.Push(temp);
+            return;
+        }
+        public void RemoveBiggerThan(Stack<int> stk, int n)
 
-        //}
+        {
+            if (stk.IsEmpty())
+                return;
+            int ontop = stk.Pop();
+            RemoveBiggerThan(stk, n);
+            if (ontop <= n)
+                stk.Push(ontop);
+        }
+        public void RemoveSmallerThan(Stack<int> stk, int n)
+
+        {
+            if (stk.IsEmpty())
+                return;
+            int ontop = stk.Pop();
+            RemoveSmallerThan(stk, n);
+            if (ontop >= n)
+                stk.Push(ontop);
+        }
+        
+        
+
     }
+}
